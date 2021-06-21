@@ -6,7 +6,7 @@ import os
 print(f'Input the skills you are not familiar with...')
 unfamiliar_skills = input('>')
 print(f'Filtering out...{unfamiliar_skills}')
-post_number = 1
+iter_number = 1
 
 def find_jobs():
     html_text = requests.get('https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=python&txtLocation=').text
@@ -19,7 +19,7 @@ def find_jobs():
             skills = job.find('span', class_='srp-skills').text.replace(' ', '')
             more_info = job.h2.a['href']
             if unfamiliar_skills not in skills:
-                with open(f'post_{post_number}/{index}.txt', 'w') as f:
+                with open(f'post_{iter_number}/{index}.txt', 'w') as f:
                     f.write(f'Company Name: {company_name.strip()}\n')
                     f.write(f'Skiils: {skills.strip()}\n')
                     f.write(f'More info: {more_info}\n')
@@ -27,7 +27,7 @@ def find_jobs():
 
 if __name__ == '__main__':
     while True:
-        os.mkdir(f'post_{post_number}')
+        os.mkdir(f'post_{iter_number}')
         find_jobs()
         time.sleep(10)
-        post_number += 1
+        iter_number += 1
