@@ -1,1 +1,1 @@
-# crawler_jobs_example
+# Crawler Example for static pages
